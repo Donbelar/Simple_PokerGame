@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<title>Concentration Mini Game</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+
+<style type="text/css">
+
+table td {
+padding:40px;
+border:1px solid gray;
+font-size:30px;
+color:black;
+}
+#container {
+margin:0 auto;
+width:570px;
+}
+div {
+margin:0px;
+}
+
+
+.card{
+float:left;
+border:1px solid gray;
+width:140px;
+height:193px;
+font-size:0px;
+font-family:none;
+}
+
+img{
+visibility:visible;
+}
+button {
+margin-top:30px; border-radius:4px; background-color:white; padding:10px; border:1px solid gray;
+}
+button:hover {
+background-color:gray;
+color:white;
+cursor:pointer;
+}
+
+    @media only screen and (max-width: 500px) {
+	
+	#container {
+width:370px;
+}
+	
+	}
+
+h3{
+font-family:Abel;
+color:gray;
+font-size:24px;
+margin:0px;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<div id="container">
+
+<h3>Concentration Game</h4>
+<p style="font-family:ARIAL; font-size:14px; color:gray;">Match two cards to win the game</p>
+<div class="card" id="c1"><img id="img1" onclick="hide('testing', this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c2"><img id="img2" onclick="hide('img2',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c3"><img id="img3" onclick="hide('img3',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c4"><img id="img4" onclick="hide('img4',this)" src="images/card_back.jpg"/></div>
+
+
+
+<div class="card" id="c5"><img id="img5" onclick="hide('img5',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c6"><img id="img6" onclick="hide('img6',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c7"><img id="img7" onclick="hide('img7',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c8"><img id="img8" onclick="hide('img8',this)" src="images/card_back.jpg"/></div>
+
+
+
+<div class="card" id="c9"><img id="img9" onclick="hide('img9',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c10"><img id="img10" onclick="hide('img10',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c11"><img id="img11" onclick="hide('img11',this)" src="images/card_back.jpg"/></div>
+<div class="card" id="c12"><img id="img12" onclick="hide('img12',this)" src="images/card_back.jpg"/></div>
+
+
+
+<button onclick="window.location.href = 'game.html'">Start New Game</button>
+
+</div>
+
+<div style="display:inline;">
+
+</div>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+
+// starts the game on page load
+window.onload = function() {
+start();
+};
+
+// click counter set as 1 from start
+var c = 1;
+
+// save location of cards clicked
+var card1;
+var card2;
+
+// save location of cards turn
+var card1Back;
+var card2Back;
+
+function start(){
+
+var cards = ['1','2','3','4','5','6','1','2','3','4','5','6'];
+
+// shuffle cards in array
+cards.sort(function() { return 0.5 - Math.random() });
+
+//print cards array
+for(var i = 0; i < 12 ; i++){
+cNum = i + 1;
+document.getElementById("c" + cNum).class = cards[i];
+document.getElementById("c" + cNum).style.backgroundImage = "url('images/" + cards[i] + ".png')";
+document.getElementById("c" + cNum).onclick = function() { check(this.class,this.innerHTML) };
+
+}
+
+
+}
+
+function check(cardLoc){
+
+
+// check numbe of click, if it's first click save first card location else second card click location
+if(c == 1){
+card1Loc = cardLoc;
+} else {
+card2Loc = cardLoc;
+
+if(card1Loc == card2Loc){
+
+
+card1Back = "";
+card2Back = "";
+} else {
+hideCards()
+}
+c = 0;
+}
+c++;
+}
+
+// hides cards on click and saves back card location
+function hide(test,i){
+
+
+i.style.visibility = "hidden";
+
+if(c == 1){
+card1Back = i;
+} else { 
+card2Back = i;
+}
+
+}
+
+// hides cards if card 1 and card 2 clicked are not the same
+function hideCards(){
+
+alert('Try again');
+
+card1Back.style.visibility = 'visible';
+card2Back.style.visibility = 'visible';
+}
+
+</script>
+</body>
+
+</html>
